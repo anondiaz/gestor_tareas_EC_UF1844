@@ -4,13 +4,13 @@
 
 // $server_name = "127.0.0.1";
 // $server_name = "localhost";
-// $bbdd = "colores";
+// $bbdd = "tareas_andres_diaz";
 // $port = 3306;
 // $user = "root";
 // $password = "";
 
 $server_name = "localhost";
-$bbdd = "gestor_tareas";
+$bbdd = "tareas_andres_diaz";
 $port = 3307;
 $user = "root";
 $password = "CIEF1234";
