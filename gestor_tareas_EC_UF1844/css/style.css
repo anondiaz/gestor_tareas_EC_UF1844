@@ -5,18 +5,18 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+
+
 h1 {
     text-align: center;
     margin: 2rem 0;
 }
 
 main {
-    max-width: 1000px;
+    /* max-width: 1000px; */
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    
+    display: flex;
+    flex-direction: column;
     div {
         margin: .5rem 0;
         padding: 0.5rem 1rem;
@@ -54,8 +54,20 @@ form {
 }
 .items {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    div {
+        display: flex;
+        justify-content: space-between;
+        border: none;
+    }
     a{
         color: inherit;
     }
+}
+
+.tareas {
+    border: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
 }

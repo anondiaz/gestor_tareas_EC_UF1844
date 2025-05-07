@@ -6,13 +6,29 @@ id_tarea  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 titulo VARCHAR (50),
 descripcion VARCHAR (200),
 fecha_new TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-fecha_modify TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+fecha_modify TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+estado VARCHAR (20)
 -- id_estado INT NOT NULL
 );
 
-INSERT INTO tareas (titulo, descripcion) VALUES ("Crear la BBDD", "Plantear la BBDD y crear el script para generarla");
-INSERT INTO tareas (titulo, descripcion) VALUES ("Preparar estructura archivos", "Organizar la estructura de directorios para poder gestionar adecuadamente el proyecto");
-INSERT INTO tareas (titulo, descripcion) VALUES ("Empezar a programar", "Ponerse a picar código para que este lista a tiempo!");
+-- DROP DATABASE tareas_andres_diaz;
+
+INSERT INTO tareas (titulo, descripcion, estado) VALUES ("Tarea 1, Crear la BBDD", "Plantear la BBDD y crear el script para generarla", "Finalizada");
+INSERT INTO tareas (titulo, descripcion, estado) VALUES ("Tarea 2, Preparar estructura archivos", "Organizar la estructura de directorios para poder gestionar adecuadamente el proyecto", "Urgente");
+INSERT INTO tareas (titulo, descripcion, estado) VALUES ("Tarea 3, Empezar a programar", "Ponerse a picar código para que este lista a tiempo!", "Ejecución");
+INSERT INTO tareas (titulo, descripcion, estado) VALUES ("Tarea 4, Ver la estructura de la web", "Ponerse a diseñar la estructura para que este lista", "Pendiente");
+
+INSERT INTO tareas (titulo, descripcion, estado) VALUES ("Tarea 5", "Organizar la estructura de directorios para poder gestionar adecuadamente el proyecto", "Urgente");
+INSERT INTO tareas (titulo, descripcion, estado) VALUES ("Tarea 6", "Ponerse a picar código para que este lista a tiempo!", "Ejecución");
+INSERT INTO tareas (titulo, descripcion, estado) VALUES ("Tarea 7", "Ponerse a diseñar la estructura para que este lista", "Pendiente");
+INSERT INTO tareas (titulo, descripcion, estado) VALUES ("Tarea 8", "Plantear la BBDD y crear el script para generarla", "Finalizada");
+
+INSERT INTO tareas (titulo, descripcion, estado) VALUES ("Tarea 9", "Organizar la estructura de directorios para poder gestionar adecuadamente el proyecto", "Ejecución");
+INSERT INTO tareas (titulo, descripcion, estado) VALUES ("Tarea 10", "Ponerse a picar código para que este lista a tiempo!", "Finalizada");
+INSERT INTO tareas (titulo, descripcion, estado) VALUES ("Tarea 11", "Ponerse a diseñar la estructura para que este lista", "Pendiente");
+INSERT INTO tareas (titulo, descripcion, estado) VALUES ("Tarea 12", "Plantear la BBDD y crear el script para generarla", "Finalizada");
+
+-- UPDATE tareas SET estado = "Ejecución" WHERE id_tarea = ;
 
 -- CREATE TABLE IF NOT EXISTS estados (
 -- id_estado  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

@@ -6,8 +6,8 @@
 // include_once 'nombre_fichero.php';  // Usar el error como un warning, no detendremos el script, solo realiza la conexión una vez
 // require_once 'nombre_fichero.php'; // Usar el error como crítico y detiene el script, solo realiza la conexión una vez
 
-// require_once 'connection.php';
-require_once 'connection2.php';
+require_once 'connection.php';
+// require_once 'connection2.php';
 // require_once 'connection3.php';
 require_once 'traduccion_estados.php';
 // echo "Soy el index.php";
@@ -34,7 +34,7 @@ $arrayFilas = $preparacion->fetchAll();
 
 // print_r($arrayFilas);
 // Declaramos un color de letra base
-$color = "white";
+// $color = "white";
 
 // if ($_GET) {
 //     // echo $_GET['id'];
@@ -54,6 +54,7 @@ $conn = null;
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,83 +62,175 @@ $conn = null;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <header>
         <h1>Nuestra gestion de tareas</h1>
     </header>
     <main>
-        <section>
-            <h2>Nuestras tareas</h2>
-            <?php foreach ($arrayFilas as $fila) : ?>
 
-                <?php if ( $fila['color'] == "white" || $fila['color'] == "yellow" || $fila['color'] == "pink" || $fila['color'] == "grey" )  {
-                    $color = "black";
-                 } else {
-                    $color = "white";
-                 }
-                  ?>
-                <div class="items" style="background-color:<?= $fila['color'] ?>; color: <?= $color?>">
-                    <p>
-                        <?= $fila['usuario'] ?>
-                    </p>
-                    <span>
-                        <a href="index.php?id=<?= $fila['id_color']?>&user= <?= str_replace(" ", "%20", $fila['usuario'])?>&color=<?= $fila['color']?>"><i class="fa-solid fa-user-pen"></i></a>
-                        <a href="delete.php?id=<?= $fila['id_color']?>"><i class="fa-solid fa-trash"></i></a>
-                    </span>
-                    
-                </div>
-                
-            <?php endforeach ?>
-        </section>
         <section>
 
-            <?php if ($_GET ) : ?>
-                <h2>Modifica tus tareas</h2>     
+            <?php if ($_GET) : ?>
+                <h2>Modifica tus tareas</h2>
                 <form action="update.php" method="post">
                     <fieldset>
-                    <input type="text" name="id" value="<?= $_GET['id'] ?>" hidden >
+                        <input type="text" name="id" value="<?= $_GET['id'] ?>" hidden>
                         <div>
-                            <label for="usuario">Tu nombre : </label>
-                            <input type="text" name="usuario" id="usuario" value="<?= $_GET['user'] ?>" >
-                        </div>
-                            <div>
-                                <label for="color">Tu color : </label>
-                                <input type="text" name="color" id="color" value="<?= $_GET['color']?>" >
-                            </div>
-                            <div>
-                                <button type="submit">Enviar datos</button>
-                                <button type="reset">Limpiar formulario</button>
-                            </div>
-
-                        </fieldset>
-
-                    </form>
-                    <?php else : ?>
-
-            
-
-                 <h2>Crea una nueva tarea</h2>
-                 <form action="insert.php" method="post">
-                    <fieldset>
-
-                        <div>
-                            <label for="usuario">Tu nombre : </label>
-                            <input type="text" name="usuario" id="usuario">
+                            <label for="usuario">Título : </label>
+                            <input type="text" name="titulo" id="titulo" value="<?= $_GET['titulo'] ?>">
                         </div>
                         <div>
-                            <label for="color">Tu color : </label>
-                            <input type="text" name="color" id="color">
+                            <label for="color">Descripción : </label>
+                            <input type="text" name="descripcion" id="descripcion" value="<?= $_GET['descripcion'] ?>">
                         </div>
                         <div>
-                            <button type="submit">Enviar datos</button>
+                        <legend>Elige un estado</legend>
+                            <select name="estado" id="estado" value="<?= $_GET['estado'] ?>">
+                                <option value="Pendiente">Pendiente</option>    
+                                <option value="Ejecución">Ejecución</option>
+                                <option value="Finalizada">Finalizada</option>
+                                <option value="Urgente">Urgente</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit">Guardar Tarea</button>
                             <button type="reset">Limpiar formulario</button>
                         </div>
 
                     </fieldset>
 
-                 </form>
-                 <?php endif;  ?>
+                </form>
+            <?php else : ?>
+                <h2>Crea una nueva tarea</h2>
+                <form action="insert.php" method="post">
+                    <fieldset>
+
+                        <div>
+                            <label for="usuario">Título : </label>
+                            <input type="text" name="titulo" id="titulo">
+                            <input type="checkbox" name="urgente" id="urgente">
+                            <label for="urgente">Urgente</label>
+                        </div>
+                        <div>
+                            <label for="color">Descripción : </label>
+                            <textarea name="descripcion" cols="30" rows="10"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit">Crear tarea</button>
+                            <button type="reset">Limpiar formulario</button>
+                        </div>
+
+                    </fieldset>
+
+                </form>
+            <?php endif;  ?>
+        </section>
+        <section>
+            <h2>Nuestras tareas</h2>
+
+            <div class="tareas">
+                <div class="urgente">
+                <h3>Tareas urgentes</h3>
+                    <?php foreach ($arrayFilas as $fila) : ?>
+                        <!-- <?= $fila['estado'] ?> -->
+                        <?php if ($fila['estado'] == "Urgente") : ?>
+
+                            <div class="items">
+                                <h4>
+                                    <?= $fila['titulo'] ?>
+                                </h4>
+                                <p>
+                                    <?= $fila['descripcion'] ?>
+                                </p>
+                                <div>
+                                    <p>
+                                        <?= $fila['estado'] ?>
+                                    </p>
+                                    <span>
+                                        <a href="index.php?id=<?= $fila['id_tarea']?>&titulo= <?= str_replace(" ", "%20", $fila['titulo'])?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion'])?>&estado=<?= str_replace(" ", "%20", $fila['estado'])?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="delete.php?id=<?= $fila['id_tarea']?>"><i class="fa-solid fa-trash"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        <?php endif;  ?>
+                    <?php endforeach ?>
+                </div>
+                <div class="pendiente">
+                <h3>Tareas pendientes</h3>
+                    <?php foreach ($arrayFilas as $fila) : ?>
+                        <?php if ($fila['estado'] == "Pendiente") : ?>
+                            <div class="items">
+                                <h4>
+                                    <?= $fila['titulo'] ?>
+                                </h4>
+                                <p>
+                                    <?= $fila['descripcion'] ?>
+                                </p>
+                                <div>
+                                <p>
+                                    <?= $fila['estado'] ?>
+                                </p>
+                                <span>
+                                    <a href="index.php?id=<?= $fila['id_tarea']?>&titulo= <?= str_replace(" ", "%20", $fila['titulo'])?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion'])?>&estado=<?= str_replace(" ", "%20", $fila['estado'])?>"><i class="fa-solid fa-user-pen"></i></a>
+                                    <a href="delete.php?id=<?= $fila['id_tarea']?>"><i class="fa-solid fa-trash"></i></a>
+                                </span>
+                                </div>
+                            </div>
+                        <?php endif;  ?>
+                    <?php endforeach ?>
+                </div>
+                <div class="ejecucion">
+                <h3>Tareas en ejecución</h3>
+                    <?php foreach ($arrayFilas as $fila) : ?>
+                        <?php if ($fila['estado'] == "Ejecución") : ?>
+                            <div class="items">
+                                <h4>
+                                    <?= $fila['titulo'] ?>
+                                </h4>
+                                <p>
+                                    <?= $fila['descripcion'] ?>
+                                </p>
+                                <div>
+                                    <p>
+                                        <?= $fila['estado'] ?>
+                                    </p>
+                                    <span>
+                                        <a href="index.php?id=<?= $fila['id_tarea']?>&titulo= <?= str_replace(" ", "%20", $fila['titulo'])?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion'])?>&estado=<?= str_replace(" ", "%20", $fila['estado'])?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="delete.php?id=<?= $fila['id_tarea']?>"><i class="fa-solid fa-trash"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        <?php endif;  ?>
+                    <?php endforeach ?>
+                </div>
+                <div class="finalizada">
+                <h3>Tareas finalizadas</h3>
+                    <?php foreach ($arrayFilas as $fila) : ?>
+                        <?php if ($fila['estado'] == "Finalizada") : ?>
+                            <div class="items">
+                                <h4>
+                                    <?= $fila['titulo'] ?>
+                                </h4>
+                                <p>
+                                    <?= $fila['descripcion'] ?>
+                                </p>
+                                <div>
+                                <p>
+                                    <?= $fila['estado'] ?>
+                                </p>
+                                <span>
+                                    <a href="index.php?id=<?= $fila['id_tarea']?>&titulo= <?= str_replace(" ", "%20", $fila['titulo'])?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion'])?>&estado=<?= str_replace(" ", "%20", $fila['estado'])?>"><i class="fa-solid fa-user-pen"></i></a>
+                                    <a href="delete.php?id=<?= $fila['id_tarea']?>"><i class="fa-solid fa-trash"></i></a>
+                                </span>
+                                </div>
+                            </div>
+                        <?php endif;  ?>
+                    <?php endforeach ?>
+                </div>
+            </div>
         </section>
     </main>
 </body>
+
 </html>

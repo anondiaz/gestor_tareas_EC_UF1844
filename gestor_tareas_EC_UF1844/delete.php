@@ -1,15 +1,18 @@
 <?php
 
-// require_once 'connection.php';
-require_once 'connection2.php';
+require_once 'connection.php';
+// require_once 'connection2.php';
 // require_once 'connection3.php';
 
+// echo "Soy delete.php";
+// echo "<br>"."--------------------"."<br>";
 // Nos devuelve el numero del id del enlace que apunta a esta pagina
 // es decir resuelve la variable que se encuentra allí y es lo que nos retorna
 // echo $_GET['id'];
+// echo "<br>"."--------------------"."<br>";
 
 // Definir la querie como string
-$delete = "DELETE FROM colores WHERE id_color = ?";
+$delete = "DELETE FROM tareas WHERE id_tarea = ?";
 
 // Preparación, '->' con espacios antes y después opcional
 $deletePreparacion = $conn -> prepare($delete);
