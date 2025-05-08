@@ -46,7 +46,6 @@ $arrayFilas = $preparacion->fetchAll();
 
 // Cerramos la conexión
 $conn = null;
-
 // echo "<br>"."-----------------"."<br>";
 ?>
 
@@ -66,37 +65,69 @@ $conn = null;
 
 <body>
     <header>
-        <h1>Nuestra gestion de tareas</h1>
+        <h1>Tasked</h1>
     </header>
     <main>
         <section class="formularios">
             <?php if ($_GET) : ?>
                 <h2>Modifica tus tareas</h2>
-                <form class="modificar" action="update.php" method="post">
 
-                    <input type="text" name="id" value="<?= $_GET['id'] ?>" hidden>
-                    <div>
-                        <label for="usuario">Título : </label>
-                        <input type="text" name="titulo" id="titulo" value="<?= $_GET['titulo'] ?>">
+                <form action="update.php" method="post">
+                    <div class="crear">
+                        <input type="text" name="id" value="<?= $_GET['id'] ?>" hidden>
+                        <div class="datos">
+                            <div class="base">
+                                <label for="usuario">Título : </label>
+                                <input maxlength="40" type="text" name="titulo" id="titulo" value="<?= $_GET['titulo'] ?>">
+                                <div>
+                                    <legend>Elige un estado</legend>
+                                    <!-- Comprobamos cual es el estado del select -->
+                                    <?php $estado = isset($_GET['estado']) ? $_GET['estado'] : 'Pendiente'; ?>
+                                    <!-- <?= $estado ?>                             -->
+                                    <select name="estado" id="estado">
+                                        <!-- Añadimos el selected para mostrarlo en el formulario
+                                 Si $estado es exactamente igual al nombre del estado entences escribimos selected
+                                 Si no lo dejamos vacio, y siempre será alguno de estos
+                                  -->
+                                        <option value="Pendiente" <?= $estado === 'Pendiente' ? 'selected' : '' ?>>Pendiente</option>
+                                        <option value="Ejecución" <?= $estado === 'Ejecución' ? 'selected' : '' ?>>Ejecución</option>
+                                        <option value="Finalizada" <?= $estado === 'Finalizada' ? 'selected' : '' ?>>Finalizada</option>
+                                        <option value="Urgente" <?= $estado === 'Urgente' ? 'selected' : '' ?>>Urgente</option>
+                                    </select>
+                                    <!-- Original -->
+                                    <!-- <select name="estado" id="estado">
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="Ejecución">Ejecución</option>
+                                <option value="Finalizada">Finalizada</option>
+                                <option value="Urgente">Urgente</option>
+                            </select> -->
+                                </div>
+                                <p> * Aquí puedes seleccionar un nuevo estado, el seleccionado es el actual.</p>
+                            </div>
+                            <!-- <?= $_GET['descripcion'] ?> -->
+                            <?php $descripcion = isset($_GET['descripcion']) ? $_GET['descripcion'] : ''; ?>
+                            <div class="detalle">
+                                <label for="color">Descripción : </label>
+                                <textarea name="descripcion" maxlength="150"><?= htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8') ?></textarea>
+                            </div>
+                            <!-- <?= $_GET['fechafin'] ?>
+                            <br>
+                            <?= $_GET['horafin'] ?> -->
+                            <?php
+                            $fechafin = isset($_GET['fechafin']) ? $_GET['fechafin'] : '';
+                            $horafin = isset($_GET['horafin']) ? $_GET['horafin'] : '';
+                            ?>
+                            <div class="fecha">
+                                <label for="entrada">Fecha de finalización :</label>
+                                <input type="date" name="fechafin" id="fechafin" value="<?= htmlspecialchars($fechafin, ENT_QUOTES, 'UTF-8') ?>"/>
+                                <input type="time" name="horafin" id="horafin" value="<?= htmlspecialchars($horafin, ENT_QUOTES, 'UTF-8') ?>" />
+                            </div>
+                        </div>
+                        <div class="botones">
+                            <button type="submit">Guardar Tarea</button>
+                            <button type="button" onclick="location.href='<?= 'index.php'; ?>'">Cancelar</button>
+                        </div>
                     </div>
-                    <div>
-                        <label for="color">Descripción : </label>
-                        <input type="text" name="descripcion" id="descripcion" value="<?= $_GET['descripcion'] ?>">
-                    </div>
-                    <div>
-                        <legend>Elige un estado</legend>
-                        <select name="estado" id="estado" value="<?= $_GET['estado'] ?>">
-                            <option value="Pendiente">Pendiente</option>
-                            <option value="Ejecución">Ejecución</option>
-                            <option value="Finalizada">Finalizada</option>
-                            <option value="Urgente">Urgente</option>
-                        </select>
-                    </div>
-                    <div>
-                        <button type="submit">Guardar Tarea</button>
-                        <button type="button" onclick="location.href='<?= 'index.php'; ?>'">Cancelar</button>
-                    </div>
-
                 </form>
             <?php else : ?>
                 <h2>Crea una nueva tarea</h2>
@@ -110,7 +141,7 @@ $conn = null;
                                     <input type="checkbox" name="urgente" id="urgente">
                                     <label for="urgente">Urgente</label>
                                 </div>
-                                <p> * Marcando esta casilla se marcará como urgente</p>
+                                <p> * Marcando esta casilla se marcará como urgente.</p>
                             </div>
                             <div class="detalle">
                                 <label for="color">Descripción : </label>
@@ -120,6 +151,8 @@ $conn = null;
                                 <label for="entrada">Fecha de finalización :</label>
                                 <input type="date" name="fechafin" id="fechafin" required />
                                 <input type="time" name="horafin" id="horafin" />
+                                <p> * Con Fecha</p>
+                                <p> por defecto: 23:59:59</p>
                             </div>
                         </div>
                         <div class="botones">
@@ -131,7 +164,7 @@ $conn = null;
             <?php endif; ?>
         </section>
         <section>
-            <h2>Nuestras tareas</h2>
+            <!-- <h2>Nuestras tareas</h2> -->
             <div class="tareas">
                 <div class="estados urgente">
                     <h3>Tareas urgentes</h3>
@@ -151,10 +184,16 @@ $conn = null;
                                         <?= $fila['estado'] ?>
                                     </p>
                                     <span>
-                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
                                         <a href="delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </span>
                                 </div>
+                                <p class="<?= $fila['fecha_prevista_fin'] == '' ? 'sinffinal' : 'ffinal' ?>"><?= $fila['fecha_prevista_fin'] == '' ? 'Sin fecha de finalización' : 'Fecha prevista de finalización' ?>:</p>
+                                <p>
+                                    <?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>
+                                    <?= $fila['fecha_prevista_fin'] == '' ? '' : 'a las:' ?>
+                                    <?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>
+                                </p>
                             </div>
                         <?php endif;  ?>
                     <?php endforeach ?>
@@ -175,10 +214,16 @@ $conn = null;
                                         <?= $fila['estado'] ?>
                                     </p>
                                     <span>
-                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
                                         <a href="delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </span>
                                 </div>
+                                <p class="<?= $fila['fecha_prevista_fin'] == '' ? 'sinffinal' : 'ffinal' ?>"><?= $fila['fecha_prevista_fin'] == '' ? 'Sin fecha de finalización' : 'Fecha prevista de finalización' ?>:</p>
+                                <p>
+                                    <?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>
+                                    <?= $fila['fecha_prevista_fin'] == '' ? '' : 'a las:' ?>
+                                    <?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>
+                                </p>
                             </div>
                         <?php endif;  ?>
                     <?php endforeach ?>
@@ -199,10 +244,16 @@ $conn = null;
                                         <?= $fila['estado'] ?>
                                     </p>
                                     <span>
-                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
                                         <a href="delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </span>
                                 </div>
+                                <p class="<?= $fila['fecha_prevista_fin'] == '' ? 'sinffinal' : 'ffinal' ?>"><?= $fila['fecha_prevista_fin'] == '' ? 'Sin fecha de finalización' : 'Fecha prevista de finalización' ?>:</p>
+                                <p>
+                                    <?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>
+                                    <?= $fila['fecha_prevista_fin'] == '' ? '' : 'a las:' ?>
+                                    <?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>
+                                </p>
                             </div>
                         <?php endif;  ?>
                     <?php endforeach ?>
@@ -223,10 +274,16 @@ $conn = null;
                                         <?= $fila['estado'] ?>
                                     </p>
                                     <span>
-                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
                                         <a href="delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </span>
                                 </div>
+                                <p class="<?= $fila['fecha_prevista_fin'] == '' ? 'sinffinal' : 'ffinal' ?>"><?= $fila['fecha_prevista_fin'] == '' ? 'Sin fecha de finalización' : 'Fecha prevista de finalización' ?>:</p>
+                                <p>
+                                    <?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>
+                                    <?= $fila['fecha_prevista_fin'] == '' ? '' : 'a las:' ?>
+                                    <?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>
+                                </p>
                             </div>
                         <?php endif;  ?>
                     <?php endforeach ?>

@@ -77,8 +77,8 @@ main {
       textarea {
         min-width: 250px;
         max-width: 300px;
-        min-height: 80px;
-        max-height: 100px;
+        min-height: 100px;
+        max-height: 120px;
       }
     }
     .fecha {
@@ -121,27 +121,27 @@ section {
 
 .urgente {
   background-color: lightcoral;
-  div {
+  /* div {
     background-color: red;
-  }
+  } */
 }
 .pendiente {
   background-color: lightyellow;
-  div {
+  /* div {
     background-color: yellow;
-  }
+  } */
 }
 .ejecucion {
   background-color: lightblue;
-  div {
+  /* div {
     background-color: blue;
-  }
+  } */
 }
 .finalizada {
   background-color: lightgreen;
-  div {
+  /* div {
     background-color: green;
-  }
+  } */
 }
 
 .items {
@@ -153,6 +153,7 @@ section {
   margin: 5px 0;
   display: flex;
   flex-direction: column;
+  background-color: lightgrey;
   div {
     display: flex;
     justify-content: space-between;
@@ -161,5 +162,11 @@ section {
   a {
     color: inherit;
     margin: 5px;
+  }
+  .ffinal {
+    color: blue;
+  }
+  .sinffinal {
+    color: red;
   }
 }

@@ -83,7 +83,9 @@ VALUES
 ("Tarea 1, Crear la BBDD", "Plantear la BBDD y crear el script para generarla", '2025-05-08 23:59:59', "Finalizada", 4, 0),
 ("Tarea 3, Empezar a programar", "Ponerse a picar código para que este lista a tiempo!", '2025-05-15 23:59:59', "Ejecución", 3, 0),
 ("Tarea 4, Ver la estructura de la web", "Ponerse a diseñar la estructura para que este lista", '2025-05-14 14:00:00', "Pendiente", 2, 0),
-("Tarea 11", "Ponerse a diseñar la estructura para que este lista", '2025-05-12 23:00:00', "Pendiente", 2, 0)
+("Tarea 8 Continuar con la BBDD", "Plantear la BBDD y crear el script para generarla", '2025-05-21 16:00:00', "Finalizada", 4, 0),
+("Tarea 11", "Ponerse a diseñar la estructura para que este lista", '2025-05-12 23:00:00', "Pendiente", 2, 0),
+("Tarea 9", "Organizar la estructura de directorios para poder gestionar adecuadamente el proyecto", '2025-05-16 20:00:00', "Ejecución", 3, 0)
 ;
 
 INSERT INTO tareas (titulo, descripcion, estado, id_estado, id_modificacion) 
@@ -92,8 +94,6 @@ VALUES
 ("Tarea 5", "Organizar la estructura de directorios para poder gestionar adecuadamente el proyecto", "Urgente", 1, 0),
 ("Tarea 6", "Ponerse a picar código para que este lista a tiempo!", "Ejecución", 3, 0),
 ("Tarea 7", "Ponerse a diseñar la estructura para que este lista", "Pendiente", 2, 0),
-("Tarea 8 Continuar con la BBDD", "Plantear la BBDD y crear el script para generarla", "Finalizada", 4, 0),
-("Tarea 9", "Organizar la estructura de directorios para poder gestionar adecuadamente el proyecto", "Ejecución", 3, 0),
 ("Tarea 10", "Ponerse a picar código para que este lista a tiempo!", "Finalizada", 4, 0),
 ("Tarea 12", "Plantear la BBDD y crear el script para generarla", "Finalizada", 4, 0)
 ;
