@@ -1,19 +1,25 @@
 <?php
 
-// require_once 'connection.php';
-require_once 'connection2.php';
-// require_once 'connection3.php';
+require_once 'connection.php';
 // require_once 'traduccion_colores.php';
 
-echo "Soy insert.php";
-echo "<br>"."--------------------"."<br>";
-print_r($_POST); // No muestra los datos en la barra de navegacion
-echo "<br>"."--------------------"."<br>";
+// echo "Soy insert.php";
+// echo "<br>"."--------------------"."<br>";
+// print_r($_POST); // No muestra los datos en la barra de navegacion
+// echo "<br>"."--------------------"."<br>";
 // print_r($_GET); // Muestra los datos en la barra de navegacion
-echo $_POST['titulo'];
-echo "<br>"."--------------------"."<br>";
-echo $_POST['descripcion'];
-echo "<br>"."--------------------"."<br>";
+// echo $_POST['titulo'];
+// echo "<br>"."--------------------"."<br>";
+// echo $_POST['descripcion'];
+// echo "<br>"."--------------------"."<br>";
+// echo $_POST['urgente'];
+// echo "<br>"."--------------------"."<br>";
+
+if (isset($_POST['urgente'])) {
+    $estado = 'Urgente';
+} else {
+    $estado = 'Pendiente';
+}
 
 // Definir la querie como string
 $insert = "INSERT INTO tareas(titulo, descripcion, estado) VALUES (?, ?, ?)";
@@ -22,7 +28,7 @@ $insert = "INSERT INTO tareas(titulo, descripcion, estado) VALUES (?, ?, ?)";
 $insertPreparacion = $conn -> prepare($insert);
 
 //Ejecución, '->' con espacios antes y después opcional
-// $insertPreparacion -> execute([$_POST['titulo'], $_POST['descripcion'], "Pendiente"]);
+$insertPreparacion -> execute([$_POST['titulo'], $_POST['descripcion'], $estado]);
 
 // Limpiamos el insert
 $insertPreparacion = null;
@@ -31,4 +37,4 @@ $insertPreparacion = null;
 $conn = null;
 
 // Recargamos la pagina index.php
-// header('location:index.php');
+header('location:index.php');

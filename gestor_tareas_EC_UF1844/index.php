@@ -6,9 +6,7 @@
 // include_once 'nombre_fichero.php';  // Usar el error como un warning, no detendremos el script, solo realiza la conexión una vez
 // require_once 'nombre_fichero.php'; // Usar el error como crítico y detiene el script, solo realiza la conexión una vez
 
-// require_once 'connection.php';
-require_once 'connection2.php';
-// require_once 'connection3.php';
+require_once 'connection.php';
 require_once 'traduccion_estados.php';
 // echo "Soy el index.php";
 // echo "<br>"."-----------------"."<br>";
@@ -96,7 +94,7 @@ $conn = null;
                     </div>
                     <div>
                         <button type="submit">Guardar Tarea</button>
-                        <button type="reset">Limpiar formulario</button>
+                        <button type="reset">Cancelar</button>
                     </div>
 
                 </form>

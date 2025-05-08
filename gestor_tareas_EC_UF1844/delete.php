@@ -1,8 +1,6 @@
 <?php
 
-// require_once 'connection.php';
-require_once 'connection2.php';
-// require_once 'connection3.php';
+require_once 'connection.php';
 
 // echo "Soy delete.php";
 // echo "<br>"."--------------------"."<br>";
