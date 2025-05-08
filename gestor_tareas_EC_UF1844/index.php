@@ -94,7 +94,7 @@ $conn = null;
                     </div>
                     <div>
                         <button type="submit">Guardar Tarea</button>
-                        <button type="reset">Cancelar</button>
+                        <button type="button" onclick="location.href='<?= 'index.php'; ?>'">Cancelar</button>
                     </div>
 
                 </form>
@@ -115,6 +115,11 @@ $conn = null;
                             <div class="detalle">
                                 <label for="color">Descripción : </label>
                                 <textarea name="descripcion" maxlength="150"></textarea>
+                            </div>
+                            <div class="fecha">
+                                <label for="entrada">Fecha de finalización :</label>
+                                <input type="date" name="fechafin" id="fechafin" required />
+                                <input type="time" name="horafin" id="horafin" />
                             </div>
                         </div>
                         <div class="botones">

@@ -1,8 +1,17 @@
 <?php
 
 require_once 'connection.php';
+require_once 'traduccion_estados.php';
 
-// require_once 'traduccion_colores.php';
+$id_estado = 0;
+
+print_r($arrayEstados['id_estado']);
+
+if (in_array($_POST['estado'], $arrayEstados)) {
+    $id_estado = $arrayEstados['id_estado'];
+}
+
+echo $id_estado;
 
 // echo "Soy update.php";
 // echo "<br>"."--------------------"."<br>";
@@ -24,13 +33,13 @@ $update = "UPDATE tareas SET titulo = ?, descripcion = ?, estado = ? WHERE id_ta
 $updatePreparacion = $conn -> prepare($update);
 
 //Ejecución, '->' con espacios antes y después opcional
-$updatePreparacion -> execute([$_POST['titulo'], $_POST['descripcion'], $_POST['estado'], $_POST['id']]);
+// $updatePreparacion -> execute([$_POST['titulo'], $_POST['descripcion'], $_POST['estado'], $_POST['id']]);
 
 // Limpiamos el insert
-$updatePreparacion = null;
+// $updatePreparacion = null;
 
 // Cerramos la conexión
 $conn = null;
 
 // Recargamos la pagina index.php
-header('location:index.php');
+// header('location:index.php');

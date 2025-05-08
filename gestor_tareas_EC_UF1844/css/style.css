@@ -73,6 +73,7 @@ main {
     .detalle {
       display: flex;
       flex-direction: column;
+      gap: 5px;
       textarea {
         min-width: 250px;
         max-width: 300px;
@@ -80,9 +81,12 @@ main {
         max-height: 100px;
       }
     }
-    /* .fecha {
+    .fecha {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
 
-    } */
+    }
   }
   .botones {
     display: flex;
