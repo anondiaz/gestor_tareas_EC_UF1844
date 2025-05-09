@@ -50,7 +50,7 @@ $fechahorafin = $_POST['fechafin'] . " " . $horafin;
 
 
 // Definir la querie como string
-$insert = "INSERT INTO tareas(titulo, descripcion, fecha_prevista_fin, estado, id_estado, id_modificacion) VALUES (?, ?, ?, ?, ?, ?)";
+$insert = "INSERT INTO tareas(titulo, descripcion, fecha_prevista_fin, estado, id_estado, modificacion) VALUES (?, ?, ?, ?, ?, ?)";
 
 // Preparación, '->' con espacios antes y después opcional
 $insertPreparacion = $conn -> prepare($insert);

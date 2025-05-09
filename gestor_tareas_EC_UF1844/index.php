@@ -151,8 +151,8 @@ $conn = null;
                                 <label for="entrada">Fecha de finalización :</label>
                                 <input type="date" name="fechafin" id="fechafin" required />
                                 <input type="time" name="horafin" id="horafin" />
-                                <p> * Con Fecha</p>
-                                <p> por defecto: 23:59:59</p>
+                                <p>* Con Fecha</p>
+                                <p>por defecto: 23:59:59</p>
                             </div>
                         </div>
                         <div class="botones">
@@ -184,15 +184,16 @@ $conn = null;
                                         <?= $fila['estado'] ?>
                                     </p>
                                     <span>
-                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
                                         <a href="delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </span>
                                 </div>
+                               
                                 <p class="<?= $fila['fecha_prevista_fin'] == '' ? 'sinffinal' : 'ffinal' ?>"><?= $fila['fecha_prevista_fin'] == '' ? 'Sin fecha de finalización' : 'Fecha prevista de finalización' ?>:</p>
                                 <p>
-                                    <?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>
+                                    <?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>
                                     <?= $fila['fecha_prevista_fin'] == '' ? '' : 'a las:' ?>
-                                    <?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>
+                                    <?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>
                                 </p>
                             </div>
                         <?php endif;  ?>
@@ -214,15 +215,16 @@ $conn = null;
                                         <?= $fila['estado'] ?>
                                     </p>
                                     <span>
-                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
                                         <a href="delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </span>
                                 </div>
+                                
                                 <p class="<?= $fila['fecha_prevista_fin'] == '' ? 'sinffinal' : 'ffinal' ?>"><?= $fila['fecha_prevista_fin'] == '' ? 'Sin fecha de finalización' : 'Fecha prevista de finalización' ?>:</p>
                                 <p>
-                                    <?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>
+                                    <?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>
                                     <?= $fila['fecha_prevista_fin'] == '' ? '' : 'a las:' ?>
-                                    <?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>
+                                    <?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>
                                 </p>
                             </div>
                         <?php endif;  ?>
@@ -244,15 +246,15 @@ $conn = null;
                                         <?= $fila['estado'] ?>
                                     </p>
                                     <span>
-                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
                                         <a href="delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </span>
                                 </div>
                                 <p class="<?= $fila['fecha_prevista_fin'] == '' ? 'sinffinal' : 'ffinal' ?>"><?= $fila['fecha_prevista_fin'] == '' ? 'Sin fecha de finalización' : 'Fecha prevista de finalización' ?>:</p>
                                 <p>
-                                    <?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>
+                                <?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>
                                     <?= $fila['fecha_prevista_fin'] == '' ? '' : 'a las:' ?>
-                                    <?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>
+                                    <?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>
                                 </p>
                             </div>
                         <?php endif;  ?>
@@ -274,15 +276,15 @@ $conn = null;
                                         <?= $fila['estado'] ?>
                                     </p>
                                     <span>
-                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
                                         <a href="delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </span>
                                 </div>
                                 <p class="<?= $fila['fecha_prevista_fin'] == '' ? 'sinffinal' : 'ffinal' ?>"><?= $fila['fecha_prevista_fin'] == '' ? 'Sin fecha de finalización' : 'Fecha prevista de finalización' ?>:</p>
                                 <p>
-                                    <?= explode(" ", $fila['fecha_prevista_fin'])[0] ?>
+                                <?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>
                                     <?= $fila['fecha_prevista_fin'] == '' ? '' : 'a las:' ?>
-                                    <?= explode(" ", $fila['fecha_prevista_fin'])[1] ?>
+                                    <?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>
                                 </p>
                             </div>
                         <?php endif;  ?>

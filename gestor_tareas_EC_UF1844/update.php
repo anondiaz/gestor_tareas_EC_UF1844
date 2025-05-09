@@ -3,15 +3,7 @@
 require_once 'connection.php';
 require_once 'traduccion_estados.php';
 
-$id_estado = 0;
-
 // print_r($arrayEstados);
-
-foreach ($arrayEstados as $id_estado => $estado) {
-    if ($_POST['estado'] == $arrayEstados['estado']){
-        $id_estado = $arrayEstados['id_estado'];
-    }
-}
 
 // if (in_array($_POST['estado'], $arrayEstados['estado'])) {
 //     $id_estado = $arrayEstados['id_estado'];
@@ -38,6 +30,16 @@ foreach ($arrayEstados as $id_estado => $estado) {
 // echo "<br>"."--------------------"."<br>";
 // echo $_POST['horafin'];
 // echo "<br>"."--------------------"."<br>";
+
+// ----- Vamos a recuperar el id_estado -----
+$id_estado = 0;
+
+foreach ($arrayEstados as $id_fila => $estado) {
+    print_r( $arrayEstados['$estado'] );
+    // if ($_POST['estado'] == $arrayEstados['estado']){
+    //     $id_estado = $arrayEstados['id_estado'];
+    // }
+}
 
 $fechahorafin = "";
 
@@ -67,20 +69,36 @@ $fechahorafin = $_POST['fechafin'] . " " . $horafin;
 // echo $fechahorafin;
 // echo "<br>"."--------------------"."<br>";
 
+// ----- Empezamos con la inserción en la modificación -----
+
+// $select = "SELECT * FROM tareas WHERE id_tarea = ?";
+
+// // Preparación, '->' con espacios antes y después opcional
+// $modificacion = $conn->prepare($select);
+
+// //Ejecución, '->' con espacios antes y después opcional
+// $modificacion->execute($_POST['id']);
+
+// //Obtener los valores seleccionados
+// $arrayModificacion = $modificacion->fetchAll();
+
+
+// ----- Hasta aquí la inserción en la modificación -----
+
 // Definir la querie como string
-$update = "UPDATE tareas SET titulo = ?, descripcion = ?, fecha_prevista_fin = ?, estado = ?, id_estado = ?, id_modificacion = ? WHERE id_tarea = ? ";
+$update = "UPDATE tareas SET titulo = ?, descripcion = ?, fecha_prevista_fin = ?, estado = ?, id_estado = ?, modificacion = ? WHERE id_tarea = ? ";
 
 // Preparación, '->' con espacios antes y después opcional
 $updatePreparacion = $conn -> prepare($update);
 
 //Ejecución, '->' con espacios antes y después opcional
-$updatePreparacion -> execute([$_POST['titulo'], $_POST['descripcion'], $fechahorafin, $_POST['estado'], $id_estado, 0, $_POST['id']]);
+// $updatePreparacion -> execute([$_POST['titulo'], $_POST['descripcion'], $fechahorafin, $_POST['estado'], $id_estado, 1, $_POST['id']]);
 
 // Limpiamos el insert
-$updatePreparacion = null;
+// $updatePreparacion = null;
 
 // Cerramos la conexión
 $conn = null;
 
 // Recargamos la pagina index.php
-header('location:index.php');
+// header('location:index.php');
