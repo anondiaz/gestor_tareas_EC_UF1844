@@ -4,6 +4,11 @@ require_once 'connection.php';
 require_once 'traduccion_estados.php';
 
 // print_r($arrayEstados);
+// echo "<br>"."--------------------"."<br>";
+
+// echo "<br>"."--------------------"."<br>";
+
+// echo "<br>"."--------------------"."<br>";
 
 // if (in_array($_POST['estado'], $arrayEstados['estado'])) {
 //     $id_estado = $arrayEstados['id_estado'];
@@ -34,12 +39,25 @@ require_once 'traduccion_estados.php';
 // ----- Vamos a recuperar el id_estado -----
 $id_estado = 0;
 
-foreach ($arrayEstados as $id_fila => $estado) {
-    print_r( $arrayEstados['$estado'] );
-    // if ($_POST['estado'] == $arrayEstados['estado']){
-    //     $id_estado = $arrayEstados['id_estado'];
-    // }
+foreach ($arrayEstados as $id_subarrayestado) {
+    // echo $id_subarrayestado['nombre_estado'] . "estado";
+    // echo "<br>"."--------------------"."<br>";
+    // echo $_POST['estado'] . "estado";
+    // echo "<br>"."--------------------"."<br>";
+    // echo $id_subarrayestado['id_estado'] . "id_estado";
+    // echo "<br>"."--------------------"."<br>";
+
+    if ($_POST['estado'] == $id_subarrayestado['nombre_estado']){
+        $id_estado = $id_subarrayestado['id_estado'];
+        // echo $id_estado;
+        // echo "<br>"."--------------------"."<br>";
+        // echo $id_subarrayestado['id_estado'];
+        
+    }
 }
+
+// echo $id_estado;
+// echo $estado;
 
 $fechahorafin = "";
 
@@ -53,6 +71,21 @@ if ($_POST['fechafin'] == "") {
     }
 $fechahorafin = $_POST['fechafin'] . " " . $horafin;
 }
+
+// echo $_POST['titulo'];
+// echo "<br>"."--------------------"."<br>";
+// echo $_POST['descripcion'];
+// echo "<br>"."--------------------"."<br>";
+// echo $fechahorafin;
+// echo "<br>"."--------------------"."<br>";
+// echo $_POST['estado'];
+// echo "<br>"."--------------------"."<br>";
+// echo $id_estado;
+// echo "<br>"."--------------------"."<br>";
+// echo 1;
+// echo "<br>"."--------------------"."<br>";
+// echo $_POST['id'];
+// echo "<br>"."--------------------"."<br>";
 
 
 // $fechahorafin = $_POST['fechafin'] ." ". $_POST['horafin'];
@@ -92,13 +125,13 @@ $update = "UPDATE tareas SET titulo = ?, descripcion = ?, fecha_prevista_fin = ?
 $updatePreparacion = $conn -> prepare($update);
 
 //Ejecución, '->' con espacios antes y después opcional
-// $updatePreparacion -> execute([$_POST['titulo'], $_POST['descripcion'], $fechahorafin, $_POST['estado'], $id_estado, 1, $_POST['id']]);
+$updatePreparacion -> execute([$_POST['titulo'], $_POST['descripcion'], $fechahorafin, $_POST['estado'], $id_estado, 1, $_POST['id']]);
 
 // Limpiamos el insert
-// $updatePreparacion = null;
+$updatePreparacion = null;
 
 // Cerramos la conexión
 $conn = null;
 
 // Recargamos la pagina index.php
-// header('location:index.php');
+header('location:index.php');
