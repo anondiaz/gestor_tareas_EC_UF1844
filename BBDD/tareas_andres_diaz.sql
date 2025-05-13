@@ -68,6 +68,8 @@ ON UPDATE RESTRICT
 ;
 -- ALTER TABLE modificaciones DROP FOREIGN KEY fk_modificaciones_estado;
 
+-- Creamos un trigger para las modificaciones
+
 DELIMITER //
 
 CREATE TRIGGER trg_modificacion
@@ -103,6 +105,11 @@ END //
 DELIMITER ;
 
 -- DROP TRIGGER trg_modificacion;
+
+-- Modificaciones tablas V2
+
+ALTER TABLE tareas ADD COLUMN id_usuario INT NOT NULL DEFAULT 1 ;
+ALTER TABLE tareas RENAME COLUMN fecha_new TO fecha_creacion;
 
 -- Populamos la tabla de tareas
 

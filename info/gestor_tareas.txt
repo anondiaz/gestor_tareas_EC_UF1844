@@ -4,20 +4,50 @@ editar y borrar
 
 BBDD: tareas_andres_diaz
 
-Tabla tareas: id_tarea, Título, Descripción, Fecha Creación, Fecha Prevista Finalización, id_estado, id_modificacion
+Tabla tareas: id_tarea, titulo, descripcion, fecha_creacion, fecha_prevista_fin, modificacion, id_estado, id_usuario
 
-Tabla estados: id_estado, estados ( Urgente, Pendiente, Ejecución, Finalizada)
+Tabla estados: id_estado, nombre_estado ( Urgente, Pendiente, Ejecución, Finalizada)
 
-Tabla modificaciones: id_modificacion, Fecha Modificación, id_tarea, id_estado, (titulo, descripcion)
+Tabla usuarios: id_usuario, nombre_usuario, password
 
-Crearemos un formulario para dar de alta las tareas
+Tabla detalle usuarios: id_detalle_usuario, nombre_completo, apellidos_completo, email, telefono, id_usuario
+
+Tabla modificaciones: id_modificacion, fecha_modificacion, titulo_modif, descripcion_modif, id_tarea, id_estado, id_usuario
+
+Pagina inicio
 	Titulo
-	Descripción
-	Estado
-Crearemos un formulario para modificar las tareas
+	Login -> Pagina tareas
+	Alta -> Formulario alta
+	Detalles aplicación
+
+Pagina tareas
 	Titulo
-	Descripción
-	Estado
+	Nombre usuario
+	Cerrar sesion
+	Formulario para dar de alta las tareas
+		Titulo
+		Descripción
+		Estado
+	Formulario para modificar las tareas
+		Titulo
+		Descripción
+		Estado
+	Listado tareas
+		Acceso
+			Historial
+			Modificar
+			Eliminar
+
+Pagina alta
+	Dialog
+		Formulario alta
+
+Pagina login
+	Dialog
+		Formulario login
+
+Pagina gestión de cuenta		
+
 
 Se mostrará uno u otro en función de si se quiere modificar, como en el ejercicio cuanda haya un get
 
