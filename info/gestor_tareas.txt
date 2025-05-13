@@ -1,0 +1,30 @@
+Hacer tipo trello
+Añadir fecha al crear la tarea
+editar y borrar
+
+BBDD: tareas_andres_diaz
+
+Tabla tareas: id_tarea, Título, Descripción, Fecha Creación, Fecha Prevista Finalización, id_estado, id_modificacion
+
+Tabla estados: id_estado, estados ( Urgente, Pendiente, Ejecución, Finalizada)
+
+Tabla modificaciones: id_modificacion, Fecha Modificación, id_tarea, id_estado, (titulo, descripcion)
+
+Crearemos un formulario para dar de alta las tareas
+	Titulo
+	Descripción
+	Estado
+Crearemos un formulario para modificar las tareas
+	Titulo
+	Descripción
+	Estado
+
+Se mostrará uno u otro en función de si se quiere modificar, como en el ejercicio cuanda haya un get
+
+Hay que crear una tabla para gestionar los estados, que los cargue de la BBDD
+
+Se creará una fila con los estados y cambiará la ubicación en función del estado
+
+Al hacer una modificacion se guardará un registro en la tabla modificaciones
+
+Debajo se mostrarán las tareas una debajo de otra ordenadas por fecha de modificación
