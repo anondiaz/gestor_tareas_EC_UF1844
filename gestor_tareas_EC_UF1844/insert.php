@@ -1,7 +1,7 @@
 <?php
 
 require_once 'connection.php';
-require_once 'traduccion_estados.php';
+// require_once 'traduccion_estados.php';
 
 // echo "Soy insert.php";
 // echo "<br>"."--------------------"."<br>";
@@ -25,9 +25,9 @@ if (isset($_POST['urgente'])) {
 }
 
 if ($_POST['horafin'] != "") {
-    $horafin = $_POST['horafin'] . ":59";
+    $horafin = $_POST['horafin'] . ":00";
 } else {
-    $horafin = '23:59:59';
+    $horafin = '23:59:00';
 }
 
 // echo $_POST['titulo'];
@@ -48,15 +48,16 @@ $fechahorafin = $_POST['fechafin'] . " " . $horafin;
 
 
 
+// TODO recoger el id_usuario e introducirlo en querie
 
 // Definir la querie como string
-$insert = "INSERT INTO tareas(titulo, descripcion, fecha_prevista_fin, estado, id_estado, modificacion) VALUES (?, ?, ?, ?, ?, ?)";
+$insert = "INSERT INTO tareas(titulo, descripcion, fecha_prevista_fin, id_estado, id_usuario, modificacion, borrada) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 // Preparación, '->' con espacios antes y después opcional
 $insertPreparacion = $conn -> prepare($insert);
 
 //Ejecución, '->' con espacios antes y después opcional
-$insertPreparacion -> execute([$_POST['titulo'], $_POST['descripcion'], $fechahorafin, $estado, $id_estado, 0]);
+$insertPreparacion -> execute([$_POST['titulo'], $_POST['descripcion'], $fechahorafin, $id_estado, 1, 0, 0]);
 
 // Limpiamos el insert
 $insertPreparacion = null;

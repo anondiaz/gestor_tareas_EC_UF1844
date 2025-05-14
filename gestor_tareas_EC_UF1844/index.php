@@ -1,25 +1,16 @@
 <?php
 
-// Formas de llamar a un fichero en PHP, "introduce" el codigo en el punto donde se halle
-// include 'nombre_fichero.php'; // Usar el error como un warning, no detendremos el script
-// require 'nombre_fichero.php'; // Usar el error como crítico y detiene el script
-// include_once 'nombre_fichero.php';  // Usar el error como un warning, no detendremos el script, solo realiza la conexión una vez
-// require_once 'nombre_fichero.php'; // Usar el error como crítico y detiene el script, solo realiza la conexión una vez
-
 require_once 'connection.php';
-require_once 'traduccion_estados.php';
+// require_once 'traduccion_estados.php';
 // echo "Soy el index.php";
-// echo "<br>"."-----------------"."<br>";
-// foreach ($conn -> query('SELECT * FROM colores') as $fila) {
-//     print_r($fila);
-//     echo "<br>";
-//     echo $fila['usuario'];
-//     echo "<br>";
-// }
 // echo "<br>"."-----------------"."<br>";
 
 // Definir la querie como string
-$select = "SELECT * FROM tareas";
+$select = "SELECT id_tarea, id_estado, id_usuario, ta.titulo, ta.descripcion, ta.fecha_prevista_fin, es.nombre_estado, usd.nombre_usuario 
+FROM tareas ta
+NATURAL JOIN estados es
+NATURAL JOIN usuarios_datos usd
+WHERE ta.borrada = 0";
 
 // Preparación, '->' con espacios antes y después opcional
 $preparacion = $conn->prepare($select);
@@ -31,17 +22,10 @@ $preparacion->execute();
 $arrayFilas = $preparacion->fetchAll();
 
 // print_r($arrayFilas);
-// Declaramos un color de letra base
-// $color = "white";
 
-// if ($_GET) {
-//     // echo $_GET['id'];
-//     // echo $_GET['color'];
-//     foreach ($arrayColors as $esp => $eng)
-//         if ( $_GET['color'] == $eng )  {
-//             $_GET['color'] = $esp;
-//             break;
-//         }
+// foreach ($arrayFilas as $fila) {
+//     print_r($fila);
+//     echo "<br>"."-----------------"."<br>";
 // }
 
 // Cerramos la conexión
@@ -82,7 +66,7 @@ $conn = null;
                                 <div>
                                     <legend>Elige un estado</legend>
                                     <!-- Comprobamos cual es el estado del select -->
-                                    <?php $estado = isset($_GET['estado']) ? $_GET['estado'] : 'Pendiente'; ?>
+                                    <?php $estado = isset($_GET['nombre_estado']) ? $_GET['nombre_estado'] : 'Pendiente'; ?>
                                     <!-- <?= $estado ?>                             -->
                                     <select name="estado" id="estado">
                                         <!-- Añadimos el selected para mostrarlo en el formulario
@@ -152,7 +136,7 @@ $conn = null;
                                 <input type="date" name="fechafin" id="fechafin" required />
                                 <input type="time" name="horafin" id="horafin" />
                                 <p>* Con Fecha</p>
-                                <p>por defecto: 23:59:59</p>
+                                <p>por defecto: 23:59</p>
                             </div>
                         </div>
                         <div class="botones">
@@ -169,8 +153,8 @@ $conn = null;
                 <div class="estados urgente">
                     <h3>Tareas urgentes</h3>
                     <?php foreach ($arrayFilas as $fila) : ?>
-                        <!-- <?= $fila['estado'] ?> -->
-                        <?php if ($fila['estado'] == "Urgente") : ?>
+                        <!-- <?= $fila['nombre_estado'] ?> -->
+                        <?php if ($fila['nombre_estado'] == "Urgente") : ?>
 
                             <div class="items">
                                 <h4>
@@ -181,11 +165,11 @@ $conn = null;
                                 </p>
                                 <div>
                                     <p>
-                                        <?= $fila['estado'] ?>
+                                        <?= $fila['nombre_estado'] ?>
                                     </p>
                                     <span>
-                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
-                                        <a href="delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
+                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['nombre_estado']) ?>&fechafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="pre-delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </span>
                                 </div>
                                
@@ -202,7 +186,7 @@ $conn = null;
                 <div class="estados pendiente">
                     <h3>Tareas pendientes</h3>
                     <?php foreach ($arrayFilas as $fila) : ?>
-                        <?php if ($fila['estado'] == "Pendiente") : ?>
+                        <?php if ($fila['nombre_estado'] == "Pendiente") : ?>
                             <div class="items">
                                 <h4>
                                     <?= $fila['titulo'] ?>
@@ -212,10 +196,10 @@ $conn = null;
                                 </p>
                                 <div>
                                     <p>
-                                        <?= $fila['estado'] ?>
+                                        <?= $fila['nombre_estado'] ?>
                                     </p>
                                     <span>
-                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['nombre_estado']) ?>&fechafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
                                         <a href="delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </span>
                                 </div>
@@ -233,7 +217,7 @@ $conn = null;
                 <div class="estados ejecucion">
                     <h3>Tareas en ejecución</h3>
                     <?php foreach ($arrayFilas as $fila) : ?>
-                        <?php if ($fila['estado'] == "Ejecución") : ?>
+                        <?php if ($fila['nombre_estado'] == "Ejecución") : ?>
                             <div class="items">
                                 <h4>
                                     <?= $fila['titulo'] ?>
@@ -243,10 +227,10 @@ $conn = null;
                                 </p>
                                 <div>
                                     <p>
-                                        <?= $fila['estado'] ?>
+                                        <?= $fila['nombre_estado'] ?>
                                     </p>
                                     <span>
-                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['nombre_estado']) ?>&fechafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
                                         <a href="delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </span>
                                 </div>
@@ -263,7 +247,7 @@ $conn = null;
                 <div class="estados finalizada">
                     <h3>Tareas finalizadas</h3>
                     <?php foreach ($arrayFilas as $fila) : ?>
-                        <?php if ($fila['estado'] == "Finalizada") : ?>
+                        <?php if ($fila['nombre_estado'] == "Finalizada") : ?>
                             <div class="items">
                                 <h4>
                                     <?= $fila['titulo'] ?>
@@ -273,10 +257,10 @@ $conn = null;
                                 </p>
                                 <div>
                                     <p>
-                                        <?= $fila['estado'] ?>
+                                        <?= $fila['nombre_estado'] ?>
                                     </p>
                                     <span>
-                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['estado']) ?>&fechafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                        <a href="index.php?id=<?= $fila['id_tarea'] ?>&titulo= <?= str_replace(" ", "%20", $fila['titulo']) ?>&descripcion=<?= str_replace(" ", "%20", $fila['descripcion']) ?>&estado=<?= str_replace(" ", "%20", $fila['nombre_estado']) ?>&fechafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[0] ?>&horafin=<?= $fila['fecha_prevista_fin'] == '' ? '' : explode(" ", $fila['fecha_prevista_fin'])[1] ?>"><i class="fa-solid fa-user-pen"></i></a>
                                         <a href="delete.php?id=<?= $fila['id_tarea'] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </span>
                                 </div>
