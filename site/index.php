@@ -1,5 +1,4 @@
 <?php
-
 // Para evitar que aparezcan los Warnings en el navegador
 // error_reporting(0);
 
@@ -9,74 +8,46 @@ session_start();
 require_once 'pdo_bind_connection.php';
 
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <!-- Las etiquetas meta y enlaces a ficheros las llamamos con php -->
-    <?php include_once 'etiquetas_meta.php'; ?>
-    <title>Colores</title>
+    <?php include_once 'modulos/meta.php' ?>
+    <title>TaskFlow - Gestión de Tareas</title>
+    <?php include_once 'modulos/link_files.php' ?>
 </head>
 <body>
-    <header><h1>Acceso usuarios</h1><p>Hola <?= $_SESSION['usuario'] ?></p>
-        <!-- Creamos un menú -->
-        <nav class="index-nav">
-            <ul>            
-                <!-- Tenemos dos enlaces en el menú para llamar a las correspondientes páginas -->
-                <li><a href="crear_cuenta.php">Crear cuenta</a></li>
-                <li><a href="index.php">Iniciar sesión</a></li>
+<?php include_once 'modulos/header.php' ?>
 
-
-            </ul>
-        </nav>
-    </header>
-    <main class="index-main">
-        <!-- Mostraremos un dialog para el login -->
-    <dialog id="login" open closedby="any">
-        <!-- Llamamos al login.php con el formulario-->
-                <form action="login.php" method="post">
-            <fieldset>
-                <h1>Iniciar sesión</h1>
-                <div>
-                    <label for="usuario">Nombre:</label>
-                    <input type="text" name="usuario" id="usuario">
+    <main>
+        <section id="features">
+            <h2>Características de TaskFlow</h2>
+            <div class="features">
+                <div class="feature">
+                    <img src="img/tablero.avif" alt="Tableros intuitivos">
+                    <div class="content">
+                        <h3>Toma el control de tus tareas</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
+                    </div>
                 </div>
-                <div>
-                    <label for="password">Contraseña:</label>
-                    <input type="password" name="password" id="password">
+                <div class="feature">
+                    <img src="img/tablero.avif" alt="Colaboración en tiempo real">
+                    <div class="content">
+                        <h3>Prioriza lo urgente</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
+                    </div>
                 </div>
-                <div>
-                    <a href="crear_cuenta.php">Crear una cuenta</a>
+                <div class="feature">
+                    <img src="img/movil.avif" alt="Notificaciones automáticas">
+                    <div class="content">
+                        <h3>Utilizalo alla donde estes</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
+                    </div>
                 </div>
-                 
-                <div class="error_cuenta">
-                    <!-- En caso de error en los datos mostramos mensaje con un condicional if -->
-                    <?php if ($_SESSION['error_cuenta']): ?>
-                        <p>Error en los datos</p>
-                    <?php endif; ?>
-                </div>
-                <div class="error_cuenta">
-                    <!-- En caso de error en los datos mostramos mensaje con un condicional if -->
-                    <?php if ($_SESSION['user_inexistente']): ?>
-                        <p>Usuario o contraseña incorrectos</p>
-                    <?php endif; ?>
-                </div>
-                <div class="botones">
-                    <button type="submit">Enviar</button>
-                    <button type="reset">Borrar</button>
-                </div>
-                <!-- Ponemos un enlace para volver al inicio -->
-                <!-- <a href="index.php">Volver</a> -->
-
-            </fieldset>
-        </form>
-    </dialog>
+            </div>
+        </section>
     </main>
 
-
+    <?php include_once 'modulos/footer.php' ?>
 </body>
 </html>
-<?php
-// Reseteamos las variables a false para que en la siguiente carga no se muestre el mensaje
-$_SESSION['error_cuenta'] = false;
-$_SESSION['user_inexistente'] = false;

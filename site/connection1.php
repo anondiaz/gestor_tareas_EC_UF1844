@@ -18,7 +18,7 @@ $options = [
 // Usamos un try-catch para validar la conexión
 try {
     $conn = new PDO($dsn, $username, $password, $options);
-    echo "Conexión exitosa a la base de datos.";
+    // echo "Conexión exitosa a la base de datos.";
 } catch (PDOException $e) {
     throw new PDOException($e->getMessage(), (int)$e->getCode());
     echo "Error de conexión: " . $e->getMessage();

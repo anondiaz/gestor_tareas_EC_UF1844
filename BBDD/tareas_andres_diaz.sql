@@ -1,3 +1,6 @@
+-- CREATE USER tareas@'%' IDENTIFIED BY '13579#Aeiou';
+-- GRANT ALL PRIVILEGES ON tareas_andres_diaz.* TO tareas@'%' WITH GRANT OPTION;
+
 DROP DATABASE tareas_andres_diaz;
 CREATE DATABASE IF NOT EXISTS tareas_andres_diaz;
 USE tareas_andres_diaz;
