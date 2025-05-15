@@ -1,0 +1,58 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #333;
+    color: #fff;
+  }
+  
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  /* Ocultar botón en pantallas grandes */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+  }
+  
+  /* Media query para pantallas < 750px */
+  @media (max-width: 750px) {
+    .nav-menu {
+      position: absolute;
+      top: 60px;              /* debajo de la navbar */
+      right: 0;
+      background: #333;
+      flex-direction: column;
+      width: 200px;
+      transform: translateX(100%); /* fuera de pantalla */
+      transition: transform 0.3s ease-in-out;
+    }
+    .nav-menu.active {
+      transform: translateX(0);    /* entra en pantalla */
+    }
+    .hamburger {
+      display: flex;
+    }
+  }
+  

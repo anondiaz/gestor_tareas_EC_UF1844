@@ -2,8 +2,8 @@ USE tareas_andres_diaz;
 
 INSERT INTO usuarios_datos (nombre_usuario, password)
 VALUES
-("anondiaz", "1"),
-("batman", "2")
+("prueba01", "$2y$10$2Ho9JT8iU1otQMI7P4A9gul/DkjjVg1QWx0eT4bqfC6ZrDLsn7M5y"),
+("prueba02", "$2y$10$IMbme5WOqRtgiIMxjAk/ye7oZBvgumEJKgHnVfXe1aMqyYuZZgzR6")
 ;
 
 -- Populamos la tabla de tareas --

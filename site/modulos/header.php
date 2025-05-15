@@ -2,7 +2,7 @@
 $verificarUsuario = isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'];
 ?>
 <header>
-    <div>
+    <div class="header-arriba">
         <div class="logo">
             <h1>TaskFlow</h1>
             <?= $verificarUsuario == '' ? '<img src="img/logo-largo.avif" alt="Logo TaskFlow">' : '<img src="../gestor_tareas_site/img/logo-largo.avif" alt="Logo TaskFlow">' ?>
