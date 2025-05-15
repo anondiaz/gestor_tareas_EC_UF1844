@@ -27,23 +27,31 @@ require_once 'pdo_bind_connection.php';
             <fieldset>
                 <h1>Crear cuenta</h1>
                 <div>
-                    <label for="usuario">Nombre:</label>
-                    <input type="text" name="usuario" id="usuario">
+                    <label for="nombre">* Nombre :</label>
+                    <input type="text" name="nombre" id="nombre" required>
                 </div>
                 <div>
-                    <label for="password">Contraseña:</label>
-                    <input type="password" name="password" id="password">
+                    <label for="apellidos">* Apellido/s :</label>
+                    <input type="text" name="apellidos" id="apellidos" required>
                 </div>
                 <div>
-                    <label for="password2">Repite la contraseña:</label>
-                    <input type="password" name="password2" id="password2">
+                    <label for="usuario">* N. Usuario :</label>
+                    <input type="text" name="usuario" id="usuario" required>
                 </div>
                 <div>
-                    <label for="email">Email:</label>
+                    <label for="password">* Contraseña :</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div>
+                    <label for="password2">* Repite la contraseña :</label>
+                    <input type="password" name="password2" id="password2" required>
+                </div>
+                <div>
+                    <label for="email">Email :</label>
                     <input type="email" name="email" id="email">
                 </div>
                 <div>
-                    <label for="telefono">Teléfono:</label>
+                    <label for="telefono">Teléfono :</label>
                     <input type="tel" name="telefono" id="telefono">
                 </div>
                 <div class="error_cuenta">
@@ -60,7 +68,8 @@ require_once 'pdo_bind_connection.php';
                     <button type="submit">Enviar</button>
                     <button type="reset">Borrar</button>
                 </div>
-                <a href="index.php">Volver</a>
+                <p>Los campos marcados con * son obligatorios</p>
+                <a href="index.php">Volver a inicio</a>
 
             </fieldset>
         </form>
@@ -73,4 +82,4 @@ require_once 'pdo_bind_connection.php';
 <?php
 // Reseteamos las variables a false para que en la siguiente carga no se muestre el mensaje
 $_SESSION['error_cuenta'] = false;
-$_SESSION['user_inexistente'] = false;
+$_SESSION['user_repe'] = false;

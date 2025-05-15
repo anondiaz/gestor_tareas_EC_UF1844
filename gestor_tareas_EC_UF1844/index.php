@@ -1,5 +1,13 @@
 <?php
-
+session_start(); // Seguridad, Establecemos que se inicie una sesion
+$verificarUsuario = isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'];
+if (!$verificarUsuario) {
+    $_SESSION['error_cuenta'] = true;
+    header('Location: ../gestor_tareas_site/index.php');
+    exit();
+}
+// echo $_SESSION['id_usuario'];
+// print_r($_SESSION);
 require_once 'connection.php';
 // require_once 'traduccion_estados.php';
 // echo "Soy el index.php";
@@ -37,20 +45,22 @@ $conn = null;
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="bewsystems by anondiaz" />
-    <meta name="description" content="Gestión de tareas" />
+    <!-- Las etiquetas meta y enlaces a ficheros las llamamos con php -->
+    <?php include_once '../site/modulos/meta.php' ?>
+    <title>TaskFlow - Gestión de Tareas</title>
+    <?php include_once '../site/modulos/link_files.php' ?>
+    <!-- <meta name="description" content="Gestión de tareas" />
     <meta name="keywords" content="Gestión de tareas" />
-    <title>Gestor de tareas</title>
+    <title>Gestor de tareas</title> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 
 <body>
-    <header>
-        <h1>Tasked</h1>
-    </header>
+    
+        <?php include_once '../site/modulos/header.php' ?>
+        
+    
     <main>
         <section class="formularios">
             <?php if ($_GET) : ?>
@@ -277,6 +287,7 @@ $conn = null;
             </div>
         </section>
     </main>
+    <?php include_once '../site/modulos/footer.php' ?>
 </body>
 
 </html>

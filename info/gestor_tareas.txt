@@ -10,7 +10,7 @@ Tabla estados: id_estado, nombre_estado ( Urgente, Pendiente, Ejecución, Finali
 
 Tabla usuarios_datos: id_usuario, nombre_usuario, password
 
-Tabla usuarios_detalle: id_detalle_usuario, nombre_completo, apellidos_persona, email, telefono, id_usuario
+Tabla usuarios_detalle: id_detalle_usuario, nombre_persona, apellidos_persona, email, telefono, id_usuario
 
 Tabla modificaciones: id_modificacion, fecha_modificacion, titulo_modif, descripcion_modif, id_tarea, id_estado, id_usuario
 

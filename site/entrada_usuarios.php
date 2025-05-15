@@ -36,7 +36,7 @@ require_once 'pdo_bind_connection.php';
                     <input type="password" name="password" id="password">
                 </div>
                 <div>
-                    <a href="crear_cuenta.php">Crear una cuenta</a>
+                    <a href="alta_usuarios.php">Crear una cuenta</a>
                 </div>
                  
                 <div class="error_cuenta">
@@ -56,7 +56,7 @@ require_once 'pdo_bind_connection.php';
                     <button type="reset">Borrar</button>
                 </div>
                 <!-- Ponemos un enlace para volver al inicio -->
-                <!-- <a href="index.php">Volver</a> -->
+                <a href="index.php">Volver a inicio</a>
 
             </fieldset>
         </form>

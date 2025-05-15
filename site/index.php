@@ -4,6 +4,18 @@
 
 // Inicimos una session
 session_start();
+$_SESSION['session-token'] = bin2hex(random_bytes(32)); // Seguridad crearmos un numero aleatorio dificil de descifrar
+// Reseteamos algunas variables que utilizaremos después
+$_SESSION['error_cuenta'] = false;
+$_SESSION['user_inexistente'] = false;
+$_SESSION['user_repe'] = false;
+// Comprobamos si el usuario est5a logueado y si es así lo reenviamos a la aplicación
+$verificarUsuario = isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'];
+if ($verificarUsuario) {
+    $_SESSION['error_cuenta'] = true;
+    header('Location: ../gestor_tareas_EC_UF1844/index.php');
+    exit();
+}
 // Llamamos al fichero de conexión
 require_once 'pdo_bind_connection.php';
 
