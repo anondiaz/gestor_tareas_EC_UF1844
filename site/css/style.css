@@ -55,10 +55,11 @@ a {
     flex-wrap: wrap;
 } */
 /* .logo img {
-    /* width: 40px; */
+    width: 40px;
     height: 80px;
     margin: 0 0.5rem;
-} */
+} 
+*/
 nav ul {
     list-style: none;
     display: flex;
