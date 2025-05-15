@@ -45,6 +45,8 @@ if ($_POST['horafin'] != "") {
 $fechahorafin = $_POST['fechafin'] . " " . $horafin;
 // echo $fechahorafin;
 // echo "<br>"."--------------------"."<br>";
+// echo $_SESSION['id_usuario'];
+// echo "<br>"."--------------------"."<br>";
 
 
 
@@ -57,7 +59,7 @@ $insert = "INSERT INTO tareas(titulo, descripcion, fecha_prevista_fin, id_estado
 $insertPreparacion = $conn -> prepare($insert);
 
 //Ejecución, '->' con espacios antes y después opcional
-$insertPreparacion -> execute([$_POST['titulo'], $_POST['descripcion'], $fechahorafin, $id_estado, 1, 0, 0]);
+$insertPreparacion -> execute([$_POST['titulo'], $_POST['descripcion'], $fechahorafin, $id_estado, $_SESSION['id_usuario'], 0, 0]);
 
 // Limpiamos el insert
 $insertPreparacion = null;

@@ -6,6 +6,8 @@ if (!$verificarUsuario) {
     header('Location: ../gestor_tareas_site/index.php');
     exit();
 }
+// $id_usuario = $_SESSION['id_usuario'];
+// echo $id_usuario;
 // echo $_SESSION['id_usuario'];
 // print_r($_SESSION);
 require_once 'connection.php';
@@ -18,13 +20,14 @@ $select = "SELECT id_tarea, id_estado, id_usuario, ta.titulo, ta.descripcion, ta
 FROM tareas ta
 NATURAL JOIN estados es
 NATURAL JOIN usuarios_datos usd
-WHERE ta.borrada = 0";
+WHERE ta.borrada = 0
+AND ta.id_usuario = ?";
 
 // Preparación, '->' con espacios antes y después opcional
 $preparacion = $conn->prepare($select);
 
 //Ejecución, '->' con espacios antes y después opcional
-$preparacion->execute();
+$preparacion->execute([$_SESSION['id_usuario']]);
 
 //Obtener los valores seleccionados
 $arrayFilas = $preparacion->fetchAll();
