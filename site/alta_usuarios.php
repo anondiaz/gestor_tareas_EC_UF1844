@@ -78,6 +78,7 @@ require_once 'pdo_bind_connection.php';
 
     <?php include_once 'modulos/footer.php' ?>
 </body>
+<script src="js/script.js"></script>
 </html>
 <?php
 // Reseteamos las variables a false para que en la siguiente carga no se muestre el mensaje

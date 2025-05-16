@@ -59,4 +59,4 @@ echo "Todo OK";
 // O redirigimos a otra página
 $_SESSION['usuario'] = $usuarioExistente['$usuario'];
 $_SESSION['id_usuario'] = $usuarioExistente['id_usuario'];
-header('Location: ../gestor_tareas_EC_UF1844/index.php');
+header('Location: gestor_tareas/index.php');

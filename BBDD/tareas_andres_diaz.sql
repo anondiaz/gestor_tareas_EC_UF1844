@@ -1,12 +1,10 @@
--- CREATE USER tareas@'%' IDENTIFIED BY '13579#Aeiou';
--- GRANT ALL PRIVILEGES ON tareas_andres_diaz.* TO tareas@'%' WITH GRANT OPTION;
+CREATE USER tareas_andres_diaz@'%' IDENTIFIED BY '13579#Aeiou';
 
 DROP DATABASE tareas_andres_diaz;
 CREATE DATABASE IF NOT EXISTS tareas_andres_diaz;
 USE tareas_andres_diaz;
 
--- CREATE USER tareas@'%' IDENTIFIED BY '13579#Aeiou';
--- GRANT ALL PRIVILEGES ON tareas_andres_diaz.* TO tareas@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON tareas_andres_diaz.* TO tareas_andres_diaz@'%' WITH GRANT OPTION;
 
 -- Creamos la tabla de tareas
 CREATE TABLE IF NOT EXISTS tareas (

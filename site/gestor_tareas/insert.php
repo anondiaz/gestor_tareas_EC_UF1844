@@ -1,6 +1,6 @@
 <?php
 
-require_once 'connection.php';
+require_once '../pdo_bind_connection.php';
 // require_once 'traduccion_estados.php';
 
 // echo "Soy insert.php";

@@ -13,7 +13,7 @@ $_SESSION['user_repe'] = false;
 $verificarUsuario = isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'];
 if ($verificarUsuario) {
     $_SESSION['error_cuenta'] = true;
-    header('Location: ../gestor_tareas_EC_UF1844/index.php');
+    header('Location: gestor_tareas/index.php');
     exit();
 }
 // Llamamos al fichero de conexión
@@ -25,7 +25,7 @@ require_once 'pdo_bind_connection.php';
 <head>
     <!-- Las etiquetas meta y enlaces a ficheros las llamamos con php -->
     <?php include_once 'modulos/meta.php' ?>
-    <title>TaskFlow - Gestión de Tareas</title>
+    <title>TareasApp - Gestión de Tareas</title>
     <?php include_once 'modulos/link_files.php' ?>
 </head>
 <body>
@@ -33,7 +33,7 @@ require_once 'pdo_bind_connection.php';
 
     <main>
         <section id="features">
-            <h2>Características de TaskFlow</h2>
+            <h2>Características de TareasApp</h2>
             <div class="features">
                 <div class="feature">
                     <img src="img/tablero.avif" alt="Tableros intuitivos">
@@ -62,4 +62,5 @@ require_once 'pdo_bind_connection.php';
 
     <?php include_once 'modulos/footer.php' ?>
 </body>
+<script src="js/script.js"></script>
 </html>

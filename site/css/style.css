@@ -7,16 +7,7 @@
 /* div {
     border: 1px solid black;
 } */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
-}
-a {
-    text-decoration: none;
-    color: inherit;
-}
+
 header {
     background-color: #0F67AE;
     color: #fff;
@@ -26,15 +17,112 @@ header {
     flex-wrap: wrap;
     align-items: center;
     @media (max-width: 750px) {
-        h1 {
-          display: none;
-        }
+
       }
     .header-arriba {
 
         display: flex;
     }
 }
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  /* Ocultar botón en pantallas grandes */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+/* Definimos el estilo de las barras del botón hamburguesa   */
+  .hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+  }
+  
+  /* Media query para pantallas < 750px */
+  @media (max-width: 750px) {
+    header {
+        background-color: #0F67AE;
+        color: #fff;
+        padding: 1rem 2rem;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+  
+   }
+    h1 {
+        display: none;
+      }
+    .logo img {
+        
+        /* width: 40px; */
+        height: 50px;
+        margin: 0 0.5rem;
+    } 
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        color: #fff;
+        font-weight: bold;
+      }
+    .nav-menu {
+    background-color: #0F67AE;
+      position: absolute;
+      top: 80px;              /* debajo de la navbar */
+      right: 0;
+      flex-direction: column;
+      width: 200px;
+      transform: translateX(100%); /* fuera de pantalla */
+      transition: transform 0.3s ease-in-out;
+      a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        padding: 1rem 0.5rem;
+      }
+    }
+    .nav-menu.active {
+      transform: translateX(0);    /* entra en pantalla */
+    }
+    /* Mostramos el botón hamburguesa */
+    .hamburger {
+      display: flex;
+    }
+  }
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* a {
+    text-decoration: none;
+    color: inherit;
+}
+
 
 .login-gestion {
     display: flex;
@@ -48,11 +136,7 @@ header {
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
-.logo img {
-    /* width: 40px; */
-    height: 80px;
-    margin: 0 0.5rem;
-} 
+
 nav ul {
     list-style: none;
     display: flex;
@@ -61,10 +145,7 @@ nav ul {
 nav li {
     margin-left: 1.5rem;
 }
-nav a {
-    color: #fff;
-    font-weight: bold;
-}
+
 main {
     padding: 2rem;
 }
@@ -108,4 +189,4 @@ footer {
 }
 .btn-form:hover {
     background-color: #357ab8;
-}
+} */

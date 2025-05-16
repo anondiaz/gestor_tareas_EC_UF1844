@@ -1,6 +1,6 @@
 <?php
 
-require_once 'connection.php';
+require_once '../pdo_bind_connection.php';
 
 // echo "Soy delete.php";
 // echo "<br>"."--------------------"."<br>";

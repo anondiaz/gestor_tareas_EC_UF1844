@@ -3,14 +3,14 @@ session_start(); // Seguridad, Establecemos que se inicie una sesion
 $verificarUsuario = isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'];
 if (!$verificarUsuario) {
     $_SESSION['error_cuenta'] = true;
-    header('Location: ../gestor_tareas_site/index.php');
+    header('Location: ../index.php');
     exit();
 }
 // $id_usuario = $_SESSION['id_usuario'];
 // echo $id_usuario;
 // echo $_SESSION['id_usuario'];
 // print_r($_SESSION);
-require_once 'connection.php';
+require_once '../pdo_bind_connection.php';
 // require_once 'traduccion_estados.php';
 // echo "Soy el index.php";
 // echo "<br>"."-----------------"."<br>";
@@ -49,19 +49,14 @@ $conn = null;
 
 <head>
     <!-- Las etiquetas meta y enlaces a ficheros las llamamos con php -->
-    <?php include_once '../site/modulos/meta.php' ?>
-    <title>TaskFlow - Gestión de Tareas</title>
-    <?php include_once '../site/modulos/link_files.php' ?>
-    <!-- <meta name="description" content="Gestión de tareas" />
-    <meta name="keywords" content="Gestión de tareas" />
-    <title>Gestor de tareas</title> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <?php include_once '../modulos/meta.php' ?>
+    <title>TaskFlow - Gestor de Tareas</title>
+    <?php include_once '../modulos/link_files.php' ?>
 </head>
 
 <body>
     
-        <?php include_once '../site/modulos/header.php' ?>
+        <?php include_once '../modulos/header.php' ?>
         
     
     <main>
@@ -290,7 +285,7 @@ $conn = null;
             </div>
         </section>
     </main>
-    <?php include_once '../site/modulos/footer.php' ?>
+    <?php include_once '../modulos/footer.php' ?>
 </body>
-
+<script src="../js/script.js"></script>
 </html>
